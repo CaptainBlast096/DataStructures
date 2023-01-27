@@ -2,21 +2,43 @@
 
 using namespace std;
 
-class API
+class Node
 {
     public:
+int key;
+int data;
+Node* next;
+Node()
+{
+key = 0;
+data = 0;
+next = NULL;
+}
+
+Node (int k, int d )
+{
+key = k;
+    data = d;
+    next=NULL;
+}
+}
+class SinglyLinkedList
+{
+    public:
+    Node *head; // Will only point towards class Node
     //Use template
-        PushFront(); // Takes one integer
-        TopFront(); // Takes one integer
-        PopFront(); //Takes one integer
-        PushBack();//Takes one integer
-        TopBack();//Takes one integer
-        PopBack();//Takes one integer
-        Find(); //Will be a boolean asking for an intege
-        Erase(); //Takes one integer
-        Empty(); // Boolean that asks for an integer
-        AddBefore(); // Takes one integer
-        AddAfter(); //Takes one integer
+        
+        void PushFront(Node *h); // Takes one integer
+        void TopFront(); // Takes one integer
+        void PopFront(); //Takes one integer
+        void PushBack(Node *n);//Takes one integer
+        void TopBack();//Takes one integer
+        void PopBack();//Takes one integer
+        void Find(); //Will be a boolean asking for an intege
+        void Erase(key); //Takes one integer
+        void Empty(key); // Boolean that asks for an integer
+        void AddBefore(); // Takes one integer
+        void AddAfter(); //Takes one integer
     
 }
 
