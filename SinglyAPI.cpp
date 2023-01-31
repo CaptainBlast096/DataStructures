@@ -3,16 +3,16 @@
 using namespace std;
 
 struct Node // struct is a user-defined data type in C++ the creates a data type that can be usd to group items public by default unlike a class
-        //Node contains two data fields, data and next
+    //Node contains two data fields, data and next
 {
-int data; // Represents any data type such as a int, float, or char
-Node* next; // A pointer to the next node, pointing to the next node in the list
+    int data; // Represents any data type such as a int, float, or char
+    Node* next; // A pointer to the next node, pointing to the next node in the list
 
-Node()
-{
-    next = nullptr; //nullptr is a safer way to create a new node than NULL because it is made for pointers
-                       //Last node has to point to a null value
-}
+    Node()
+    {
+        next = nullptr; //nullptr is a safer way to create a new node than NULL because it is made for pointers
+        //Last node has to point to a null value
+    }
 
 };
 
@@ -22,8 +22,11 @@ private:
     Node *head; // A pointer variable holding the address of the node with the value 1
     Node *tail; // A pointer variable holding the address of the last node
 
-    void MakeTail() //Made to update the tail pointer
+    void MakeTail() //Made to update the tail pointer | Causing pointer errors, need to find a better solution
     {
+        /*
+         * Caused me to receive : Process finished with exit code -1073741819 (0xC0000005)
+         * Dosen't properly handle the case where the head pointer is a nullptr
         Node *curr = head; //Initializing pointer called curr to the head of the list
 
         if(tail -> next != nullptr) //Checks if the next pointer is not equal to nullptr
@@ -32,7 +35,20 @@ private:
             {
                 curr = curr -> next; //curr is updated to the next node in the list until next pointer is equal to nullptr
             }
-            tail = curr; //Then tail pointer is updated to curr, which will point to the last node in the list
+            */
+
+        Node *curr = head; //Intialize curr pointer to the head of the list
+        if (head == nullptr) //If the list is empty
+        {
+            tail = nullptr; //Tail is also set to null
+        }
+        else //If the list is not empty
+        {
+            while (curr->next != nullptr) //Function will enter a loop where curr is updated to next node in the list until next pointer is equal to nullptr
+            {
+                curr = curr->next;
+                tail = curr; //Then tail pointer is updated to curr, which will point to the last node in the list
+            }
         }
     };
 public:
@@ -40,20 +56,20 @@ public:
     SinglyLinkedList():head(nullptr)
     {
         //Setting values to NULL because NULL is used for pointers
-            //In order to avoid garbage values by point to no valid object
-      // this->  head = nullptr;
-      // this-> tail = nullptr;
+        //In order to avoid garbage values by point to no valid object
+        // this->  head = nullptr;
+        // this-> tail = nullptr;
 // All functions should handle the case of an empty List
     }
 
     void PushFront(int key) //Add to front
     //Function runs fine
     {
-       Node *temp = new Node; // Creates new instance of node and assigns it to a pointer called temp. 'new' is used to dynamically allocate memory for the new node
-       temp -> data = key; //Assigns the value of the variable "value" to the "data" field of the node object that "temp" is pointing to.
-       temp -> next = head; //Assigns the value of the "head" pointer to the "next" field of the node object that "temp" is pointing to. It links the new node to the current head of the list.
-       head = temp; //Assigns the value of the "temp" pointer to the "head" pointer, making the new node the new head of the list.
-       MakeTail();//Purpose: update the tail after remove the front item in list.
+        Node *temp = new Node; // Creates new instance of node and assigns it to a pointer called temp. 'new' is used to dynamically allocate memory for the new node
+        temp -> data = key; //Assigns the value of the variable "value" to the "data" field of the node object that "temp" is pointing to.
+        temp -> next = head; //Assigns the value of the "head" pointer to the "next" field of the node object that "temp" is pointing to. It links the new node to the current head of the list.
+        head = temp; //Assigns the value of the "temp" pointer to the "head" pointer, making the new node the new head of the list.
+        MakeTail();//Purpose: update the tail after remove the front item in list.
         //This ensures the tail will always point to the last node in the list.
     }
 
@@ -84,12 +100,13 @@ public:
         head = head -> next;
         delete temp; //temp is no longer needed, so it is appropriate to deallocate memory
         MakeTail(); //Also, inside PopFront because it modifies the head while PushBack and POPBack only modify
-                        // the last node, so tail pointer does not need to be updated.
+        // the last node, so tail pointer does not need to be updated.
     }
 
     void PushBack(int key)//Add to back | Exactly the same structure as PushFront but instead of head it will be tail
-    {
     //Function runs fine
+    {
+
         Node *temp = new Node;
         temp -> data = key;
         tail -> next = temp;
@@ -97,7 +114,7 @@ public:
     }
 
     int TopBack()//Returns the last node
-    //Functions runs fine
+    //Function runs fine
     {
         if (Empty()) ///Exactly like TopFront
         {
@@ -108,17 +125,18 @@ public:
     }
 
     void PopBack()//Takes one integer
+    //Function runs fine
     {
         Node *curr = head;
         Node *prev = nullptr;
 
-        if (Empty())
+        if (Empty()) //If the linked list is empty, will return following statement
         {
             cout << "List is empty" << endl;
             return;
         }
 
-        while (curr -> next != nullptr)
+        while (curr -> next != nullptr) //If not empety. curr will move throught linked list updating curr to next till end of list
         {
             prev = curr;
             curr = curr -> next;
@@ -130,24 +148,50 @@ public:
         tail = prev;
 
     }
+
     bool Find(int key)//Will be a boolean asking for an integer
+    //Function runs fine
     {
         Node *curr = head;
+        if (Empty())
+        {
+            return false;
+        }
         while (curr -> next != nullptr)
         {
             if (curr -> data == key)
+            {
                 return true;
+            }
             curr = curr -> next;
         }
         return false;
     }
 
-    void Erase(int key)//Remove key from list
+    void Erase(int key)//Remove key from list | Bonus function added
+    //Function runs fine
     {
-        Node *curr = new Node;
+        Node *curr = head;
         Node *prev = new Node;
 
-        curr = head;
+        if (Empty())
+        {
+            cout << "List is empty" << endl;
+            return;
+        }
+
+       while (curr -> next != nullptr)
+       {
+           if (curr -> data == key)
+           {
+               prev -> next = curr -> next;
+               delete curr;
+               return;
+           }
+           prev = curr;
+           curr = curr -> next;
+       }
+       /*
         for (int i = 1; i < key; i++)
         {
             prev = curr;
@@ -159,69 +203,131 @@ public:
         temp = head;
         head = head -> next;
         delete temp;
+        */
+       MakeTail(); //Tail pointer should always point to the last node in the list, removing elements can affect the list
+                        //So the tail pointer needs to be updated accordingly
     }
 
     void EraseAll(int key)//Removes all elements from list
+    //Function runs fine
     {
+        if(Empty())
+        {
+            cout << "List is empty" << endl;
+            return;
+        }
+
         while(Find(key))
         {
             Erase(key);
         }
+        MakeTail();
     }
+
     bool Empty()//Boolean that asks for an integer
     {
         return ((head == nullptr)? true : false);
     }
-    void AddBefore(int pos, int value)//Adds key before node
-    {
-        Node *head = new Node;
-        Node *curr = new Node;
-        Node *temp = new Node;
 
-        curr = head;
-        for (int i = 1; i < pos; i++)
-        {
-            head = curr;
-            curr = curr ->next;
-        }
-        temp -> data = value;
-        head -> next = temp;
-        temp -> next = curr;
-    }
-    void AddAfter(int pos, int value)//Adds key after node
+    void AddBefore(int data, int pos)//Adds key before node
+    //Function runs fine
     {
-        //Creating three pointers
-            Node *tail = new Node;
-            Node *curr = new Node;
-            Node *temp = new Node;
-        curr = tail;
-        for (int i = 1; i < pos; i++)
+        Node *curr = head;
+        Node *prev = nullptr;
+
+        if (Empty())
         {
-            tail = curr;
+            cout << "List is empty" << endl;
+            return;
+        }
+        if (!(pos >= 0))
+        {
+            cout << "Position does not exist" << endl;
+            return;
+        }
+
+        for (int i = 0; i <pos; i++)
+        {
+            prev = curr;
             curr = curr -> next;
         }
-        temp -> data = value;
-        tail -> next = temp;
-        temp -> next = curr;
+
+        Node *newNode = new Node;
+        newNode -> data = data;
+        newNode -> next = curr;
+
+        if (prev!= nullptr)
+        {
+            head = newNode;
+        }
+        else
+        {
+            prev -> next = newNode;
+        }
+    }
+
+    void AddAfter(int data, int pos)//Adds key after node
+    //Function runs fine
+    {
+        //Creating three pointers
+        Node *curr = head;
+
+        if (Empty())
+        {
+            cout << "List is empty" << endl;
+            return;
+        }
+
+        if (!(pos >= 0))
+        {
+            cout << "Position does not exist" << endl;
+            return;
+        }
+
+        for (int i = 0; i < pos; i++)
+        {
+            curr = curr -> next;
+        }
+
+        Node *newNode = new Node;
+        newNode -> data = data;
+        newNode -> next = curr -> next;
+        curr -> next = newNode;
+        MakeTail();
     }
 
     void DisplayAll()//Prints all the elements of the list
+    //Function runs fine
     {
-        Node *temp = new Node; // Temporary node
-        temp = head; // Passing the value stored in head in temp
-
-        while (temp != nullptr)
+        Node *curr = head; // Temporary node
+        int count = 0;
+        
+        if (Empty())
         {
-            cout << temp -> data << " "; //Passing the address of data to temp
-            temp = temp -> next; // Passing the address of next to temp and assigning it to temp
+            cout << "List is empty" << endl;
+            return;
         }
+        
+        while (curr != nullptr)
+        {
+          cout << curr -> data << ((curr -> next == nullptr)?"":",");
+           curr = curr -> next;
+        }
+        cout << endl;
     }
+    
     int Size()//Returns the number of elements | iffy if it works
+    //Function runs fine
     {
         int count = 0;
-
         Node *curr =head;
 
+        if (Empty())
+        {
+            cout << "List is empty" << endl;
+            return count;
+        }
+        
         while (curr != nullptr)//An iterative approach to finding the length
         {
             count++;
@@ -229,9 +335,24 @@ public:
         }
         return count;
     }
-    void static ReplaceKey(Node *node, int newKey)//Overwrite the key to a given node
+
+    void ReplaceKey(int data, int pos)//Overwrite the key to a given node
+    //Function runs fine
     {
-        node -> data = newKey;
+        Node *curr = head;
+        
+        if (Empty())
+        {
+            cout << "List is empty" << endl;
+            return;
+        }
+        
+        for (int i = 0; i < pos; i++)
+        {
+            curr = curr -> next;
+        }
+        curr -> data = data;
+        MakeTail();
     }
 
 };
@@ -251,8 +372,8 @@ int main()
     cout << "\n";
 
 
-    //cout<< "Top: " <<list1.TopFront() << endl;
-    //cout<< "Bottom: " <<list1.TopBack() << endl;
+    cout<< "Top: " <<list1.TopFront() << endl;
+    cout<< "Bottom: " <<list1.TopBack() << endl;
     //list1.DisplayAll();
 
     return 0;
