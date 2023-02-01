@@ -411,7 +411,7 @@ int main()
 
        cout << list1.Empty() << endl;
 
-cout << "BONUS content (The shits and giggles edition)" << endl;
+cout << "BONUS content" << endl;
     SinglyLinkedList list2;
 
         list2.PushFront(35);
