@@ -1,3 +1,12 @@
+/*
+ Name: Jaleel Rogers
+ Student ID: 11239
+ Date: 02/02/23
+ Major: Computer Science
+ Course: COP4415
+ Professor: Professor Luis
+ */
+
 #include <iostream>
 
 using namespace std;
@@ -149,7 +158,7 @@ public:
 
     }
 
-    bool Find(int key)//Will be a boolean asking for an integer
+    bool FindKey(int key)//Will be a boolean asking for an integer | boolean will output 1 (true) or 0 (false) respectively
     //Function runs fine
     {
         Node *curr = head;
@@ -191,37 +200,31 @@ public:
            prev = curr;
            curr = curr -> next;
        }
-       /*
-        for (int i = 1; i < key; i++)
-        {
-            prev = curr;
-            curr = curr -> next;
-        }
-        prev -> next = curr -> next;
 
-        Node *temp = new Node;
-        temp = head;
-        head = head -> next;
-        delete temp;
-        */
        MakeTail(); //Tail pointer should always point to the last node in the list, removing elements can affect the list
                         //So the tail pointer needs to be updated accordingly
     }
 
-    void EraseAll(int key)//Removes all elements from list
+    void EraseAll()//Removes all elements from list
     //Function runs fine
     {
+        Node *curr = head;
+        Node *prev = new Node;
+
         if(Empty())
         {
             cout << "List is empty" << endl;
             return;
         }
 
-        while(Find(key))
+        while (curr != nullptr)
         {
-            Erase(key);
+            prev = curr;
+            curr = curr -> next;
+            delete prev;
         }
-        MakeTail();
+        head = nullptr;
+        tail = nullptr;
     }
 
     bool Empty()//Boolean that asks for an integer
@@ -229,24 +232,24 @@ public:
         return ((head == nullptr)? true : false);
     }
 
-    void AddBefore(int data, int pos)//Adds key before node
+    void AddBefore(int pos, int data)//Adds key before node
     //Function runs fine
     {
         Node *curr = head;
-        Node *prev = nullptr;
+        Node *prev = NULL;
 
         if (Empty())
         {
             cout << "List is empty" << endl;
             return;
         }
-        if (!(pos >= 0))
+        if (pos < 0) // Simplified expression from (!(pos >= 0)) to pos < 0
         {
             cout << "Position does not exist" << endl;
             return;
         }
 
-        for (int i = 0; i <pos; i++)
+        for (int i = 0; i < pos; i++)
         {
             prev = curr;
             curr = curr -> next;
@@ -256,7 +259,7 @@ public:
         newNode -> data = data;
         newNode -> next = curr;
 
-        if (prev!= nullptr)
+        if (prev == NULL)
         {
             head = newNode;
         }
@@ -266,7 +269,7 @@ public:
         }
     }
 
-    void AddAfter(int data, int pos)//Adds key after node
+    void AddAfter(int pos, int data)//Adds key after node
     //Function runs fine
     {
         //Creating three pointers
@@ -278,16 +281,23 @@ public:
             return;
         }
 
-        if (!(pos >= 0))
+        if (pos < 0) // Simplified expression from (!(pos >= 0)) to pos < 0
         {
-            cout << "Position does not exist" << endl;
+            cout << "Position cannot be negative" << endl;
             return;
         }
 
-        for (int i = 0; i < pos; i++)
-        {
-            curr = curr -> next;
-        }
+       int count = 0;
+       while (curr != nullptr && count < pos)
+       {
+           curr = curr -> next;
+           ++count;
+       }
+
+       if (curr == nullptr)
+       {
+           cout << "Position does not exist" << endl;
+       }
 
         Node *newNode = new Node;
         newNode -> data = data;
@@ -301,13 +311,13 @@ public:
     {
         Node *curr = head; // Temporary node
         int count = 0;
-        
+
         if (Empty())
         {
             cout << "List is empty" << endl;
             return;
         }
-        
+
         while (curr != nullptr)
         {
           cout << curr -> data << ((curr -> next == nullptr)?"":",");
@@ -315,7 +325,7 @@ public:
         }
         cout << endl;
     }
-    
+
     int Size()//Returns the number of elements | iffy if it works
     //Function runs fine
     {
@@ -327,7 +337,7 @@ public:
             cout << "List is empty" << endl;
             return count;
         }
-        
+
         while (curr != nullptr)//An iterative approach to finding the length
         {
             count++;
@@ -336,17 +346,17 @@ public:
         return count;
     }
 
-    void ReplaceKey(int data, int pos)//Overwrite the key to a given node
+    void ReplaceKey(int pos, int data)//Overwrite the key to a given node
     //Function runs fine
     {
         Node *curr = head;
-        
+
         if (Empty())
         {
             cout << "List is empty" << endl;
             return;
         }
-        
+
         for (int i = 0; i < pos; i++)
         {
             curr = curr -> next;
@@ -361,20 +371,80 @@ int main()
 {
     SinglyLinkedList list1;
 
-    list1.PushFront(25);
-    list1.PushFront(50);
-    list1.PushFront(90);
-    list1.PushFront(40);
-    list1.PushFront(35);
+        list1.PushFront(25);
+        list1.PushFront(50);
+        list1.PushFront(90);
+        list1.PushFront(40);
+        list1.PushFront(35);
 
-    cout << "List: ";
-    list1.DisplayAll();
-    cout << "\n";
+        cout << "List 1: ";
+        list1.DisplayAll();
+        cout<< "Top: " <<list1.TopFront() << endl;
+        cout<< "Bottom: " <<list1.TopBack() << endl;
+        list1.PopFront();
 
+        cout << "List 1: ";
+        list1.DisplayAll();
+        cout << endl;
 
-    cout<< "Top: " <<list1.TopFront() << endl;
-    cout<< "Bottom: " <<list1.TopBack() << endl;
-    //list1.DisplayAll();
+       list1.PopFront();
+       cout << "List 1: ";
+       list1.DisplayAll();
+
+       list1.PushBack(10);
+       list1.PushBack(12);
+       list1.PushBack(14);
+
+       cout << "List 1: ";
+       list1.DisplayAll();
+       cout << list1.FindKey(25) << endl;
+       cout << list1.FindKey(6) << endl;
+       cout <<list1.Empty() << endl;
+
+       list1.AddBefore(3,94);
+       cout << "List 1: ";
+       list1.DisplayAll();
+
+       list1.AddAfter(2,5);
+       cout << "List 1: ";
+       list1.DisplayAll();
+
+       cout << "Size of list is " << list1.Size() << endl;
+       list1.ReplaceKey(6,87);
+       cout << "List 1: ";
+       list1.DisplayAll();
+
+       list1.PopFront();
+       list1.PopFront();
+       list1.PopFront();
+       list1.PopFront();
+       list1.PopFront();
+       list1.PopFront();
+       list1.PopFront();
+       list1.PopFront();
+
+       cout << list1.Empty() << endl;
+
+cout << "BONUS content (The shits and giggles edition)" << endl;
+    SinglyLinkedList list2;
+
+        list2.PushFront(35);
+        list2.PushFront(990);
+        list2.PushFront(56);
+        list2.PushFront(76);
+        list2.PushFront(69);
+
+        list2.Erase(990);
+        cout << "List 2: ";
+        list2.DisplayAll();
+
+        list2.EraseAll();
+        cout << "List 2: ";
+        list2.DisplayAll();
+
+    SinglyLinkedList list3;
+        cout << "List 3: ";
+        list3.DisplayAll();
 
     return 0;
 }
