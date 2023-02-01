@@ -1,11 +1,10 @@
 /*
- * @SinglyAPI.cpp
- * @author Jaleel Rogers (jrogers1239@floridapoly.edu)
- * @brief Singly Linked List
- * @version 0.1
- * @date 2023-02-02
- * 
- * @copyright Copyright (c) 2023
+ Name: Jaleel Rogers
+ Student ID: 11239
+ Date: 02/02/23
+ Major: Computer Science
+ Course: COP4415
+ Professor: Professor Luis
  */
 
 #include <iostream>
@@ -20,7 +19,7 @@ struct Node // struct is a user-defined data type in C++ the creates a data type
 
     Node()
     {
-        next = nullptr; //nullptr is a safer way to create a new node than NULL because it is made for pointers
+        next = NULL; //NULL is a safer way to create a new node than NULL because it is made for pointers
         //Last node has to point to a null value
     }
 
@@ -36,25 +35,25 @@ private:
     {
         /*
          * Caused me to receive : Process finished with exit code -1073741819 (0xC0000005)
-         * Dosen't properly handle the case where the head pointer is a nullptr
+         * Dosen't properly handle the case where the head pointer is a NULL
         Node *curr = head; //Initializing pointer called curr to the head of the list
 
-        if(tail -> next != nullptr) //Checks if the next pointer is not equal to nullptr
+        if(tail -> next != NULL) //Checks if the next pointer is not equal to NULL
         {
-            while(curr -> next != nullptr)  //If not empty function enters a loop
+            while(curr -> next != NULL)  //If not empty function enters a loop
             {
-                curr = curr -> next; //curr is updated to the next node in the list until next pointer is equal to nullptr
+                curr = curr -> next; //curr is updated to the next node in the list until next pointer is equal to NULL
             }
             */
 
         Node *curr = head; //Intialize curr pointer to the head of the list
-        if (head == nullptr) //If the list is empty
+        if (head == NULL) //If the list is empty
         {
-            tail = nullptr; //Tail is also set to null
+            tail = NULL; //Tail is also set to null
         }
         else //If the list is not empty
         {
-            while (curr->next != nullptr) //Function will enter a loop where curr is updated to next node in the list until next pointer is equal to nullptr
+            while (curr->next != NULL) //Function will enter a loop where curr is updated to next node in the list until next pointer is equal to NULL
             {
                 curr = curr->next;
                 tail = curr; //Then tail pointer is updated to curr, which will point to the last node in the list
@@ -63,12 +62,12 @@ private:
     };
 public:
 
-    SinglyLinkedList():head(nullptr)
+    SinglyLinkedList():head(NULL)
     {
         //Setting values to NULL because NULL is used for pointers
         //In order to avoid garbage values by point to no valid object
-        // this->  head = nullptr;
-        // this-> tail = nullptr;
+        // this->  head = NULL;
+        // this-> tail = NULL;
 // All functions should handle the case of an empty List
     }
 
@@ -132,7 +131,7 @@ public:
     void PopBack()//Takes one integer
     {
         Node *curr = head;
-        Node *prev = nullptr;
+        Node *prev = NULL;
 
         if (Empty()) //If the linked list is empty, will return following statement
         {
@@ -140,7 +139,7 @@ public:
             return;
         }
 
-        while (curr -> next != nullptr) //If not empety. curr will move throught linked list updating curr to next till end of list
+        while (curr -> next != NULL) //If not empety. curr will move throught linked list updating curr to next till end of list
         {
             prev = curr;
             curr = curr -> next;
@@ -148,7 +147,7 @@ public:
         //Change order of tail and delete and prev and tail
 
         delete curr;
-        prev -> next = nullptr;
+        prev -> next = NULL;
         tail = prev;
 
     }
@@ -160,7 +159,7 @@ public:
         {
             return false;
         }
-        while (curr -> next != nullptr)
+        while (curr -> next != NULL)
         {
             if (curr -> data == key)
             {
@@ -182,7 +181,7 @@ public:
             return;
         }
 
-       while (curr -> next != nullptr)
+       while (curr -> next != NULL)
        {
            if (curr -> data == key)
            {
@@ -209,19 +208,19 @@ public:
             return;
         }
 
-        while (curr != nullptr)
+        while (curr != NULL)
         {
             prev = curr;
             curr = curr -> next;
             delete prev;
         }
-        head = nullptr;
-        tail = nullptr;
+        head = NULL;
+        tail = NULL;
     }
 
     bool Empty()//Boolean that asks for an integer
     {
-        return ((head == nullptr)? true : false);
+        return ((head == NULL)? true : false);
     }
 
     void AddBefore(int pos, int data)//Adds key before node
@@ -278,13 +277,13 @@ public:
         }
 
        int count = 0;
-       while (curr != nullptr && count < pos)
+       while (curr != NULL && count < pos)
        {
            curr = curr -> next;
            ++count;
        }
 
-       if (curr == nullptr)
+       if (curr == NULL)
        {
            cout << "Position does not exist" << endl;
        }
@@ -307,9 +306,9 @@ public:
             return;
         }
 
-        while (curr != nullptr)
+        while (curr != NULL)
         {
-          cout << curr -> data << ((curr -> next == nullptr)?"":",");
+          cout << curr -> data << ((curr -> next == NULL)?"":",");
            curr = curr -> next;
         }
         cout << endl;
@@ -326,7 +325,7 @@ public:
             return count;
         }
 
-        while (curr != nullptr)//An iterative approach to finding the length
+        while (curr != NULL)//An iterative approach to finding the length
         {
             count++;
             curr = curr -> next;
@@ -432,4 +431,6 @@ cout << "BONUS content (The shits and giggles edition)" << endl;
     SinglyLinkedList list3;
         cout << "List 3: ";
         list3.DisplayAll();
+
+    return 0;
 }
