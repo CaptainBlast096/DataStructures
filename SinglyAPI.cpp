@@ -72,7 +72,6 @@ public:
     }
 
     void PushFront(int key) //Add to front
-    //Function runs fine
     {
         Node *temp = new Node; // Creates new instance of node and assigns it to a pointer called temp. 'new' is used to dynamically allocate memory for the new node
         temp -> data = key; //Assigns the value of the variable "value" to the "data" field of the node object that "temp" is pointing to.
@@ -83,7 +82,6 @@ public:
     }
 
     int TopFront()//Returns data to the front of the list
-    //Function runs fine
     {
         if (!Empty()) //Empty is a function used to check whether the set container is empty or not
         {
@@ -98,7 +96,6 @@ public:
     }
 
     void PopFront()//Remove front item
-    //Function runs fine
     {
         Node *temp = head;
         if (Empty())
@@ -113,7 +110,6 @@ public:
     }
 
     void PushBack(int key)//Add to back | Exactly the same structure as PushFront but instead of head it will be tail
-    //Function runs fine
     {
 
         Node *temp = new Node;
@@ -123,7 +119,6 @@ public:
     }
 
     int TopBack()//Returns the last node
-    //Function runs fine
     {
         if (Empty()) ///Exactly like TopFront
         {
@@ -134,7 +129,6 @@ public:
     }
 
     void PopBack()//Takes one integer
-    //Function runs fine
     {
         Node *curr = head;
         Node *prev = nullptr;
@@ -159,7 +153,6 @@ public:
     }
 
     bool FindKey(int key)//Will be a boolean asking for an integer | boolean will output 1 (true) or 0 (false) respectively
-    //Function runs fine
     {
         Node *curr = head;
         if (Empty())
@@ -178,7 +171,6 @@ public:
     }
 
     void Erase(int key)//Remove key from list | Bonus function added
-    //Function runs fine
     {
         Node *curr = head;
         Node *prev = new Node;
@@ -206,7 +198,6 @@ public:
     }
 
     void EraseAll()//Removes all elements from list
-    //Function runs fine
     {
         Node *curr = head;
         Node *prev = new Node;
@@ -233,7 +224,6 @@ public:
     }
 
     void AddBefore(int pos, int data)//Adds key before node
-    //Function runs fine
     {
         Node *curr = head;
         Node *prev = NULL;
@@ -270,7 +260,6 @@ public:
     }
 
     void AddAfter(int pos, int data)//Adds key after node
-    //Function runs fine
     {
         //Creating three pointers
         Node *curr = head;
@@ -307,7 +296,6 @@ public:
     }
 
     void DisplayAll()//Prints all the elements of the list
-    //Function runs fine
     {
         Node *curr = head; // Temporary node
         int count = 0;
@@ -327,7 +315,6 @@ public:
     }
 
     int Size()//Returns the number of elements | iffy if it works
-    //Function runs fine
     {
         int count = 0;
         Node *curr =head;
@@ -347,7 +334,6 @@ public:
     }
 
     void ReplaceKey(int pos, int data)//Overwrite the key to a given node
-    //Function runs fine
     {
         Node *curr = head;
 
