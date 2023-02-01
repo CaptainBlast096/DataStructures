@@ -1,10 +1,11 @@
 /*
- Name: Jaleel Rogers
- Student ID: 11239
- Date: 02/02/23
- Major: Computer Science
- Course: COP4415
- Professor: Professor Luis
+ * @SinglyAPI.cpp
+ * @author Jaleel Rogers (jrogers1239@floridapoly.edu)
+ * @brief Singly Linked List
+ * @version 0.1
+ * @date 2023-02-02
+ * 
+ * @copyright Copyright (c) 2023
  */
 
 #include <iostream>
@@ -431,6 +432,4 @@ cout << "BONUS content (The shits and giggles edition)" << endl;
     SinglyLinkedList list3;
         cout << "List 3: ";
         list3.DisplayAll();
-
-    return 0;
 }
