@@ -19,7 +19,7 @@ struct Node // struct is a user-defined data type in C++ the creates a data type
 
     Node()
     {
-        next = NULL; //NULL is a safer way to create a new node than NULL because it is made for pointers
+        next = NULL; //nullptr is a safer way to create a new node than NULL because it is made for pointers | g++ does not know nullptr
         //Last node has to point to a null value
     }
 
@@ -181,20 +181,20 @@ public:
             return;
         }
 
-       while (curr -> next != NULL)
-       {
-           if (curr -> data == key)
-           {
-               prev -> next = curr -> next;
-               delete curr;
-               return;
-           }
-           prev = curr;
-           curr = curr -> next;
-       }
+        while (curr -> next != NULL)
+        {
+            if (curr -> data == key)
+            {
+                prev -> next = curr -> next;
+                delete curr;
+                return;
+            }
+            prev = curr;
+            curr = curr -> next;
+        }
 
-       MakeTail(); //Tail pointer should always point to the last node in the list, removing elements can affect the list
-                        //So the tail pointer needs to be updated accordingly
+        MakeTail(); //Tail pointer should always point to the last node in the list, removing elements can affect the list
+        //So the tail pointer needs to be updated accordingly
     }
 
     void EraseAll()//Removes all elements from list
@@ -220,7 +220,7 @@ public:
 
     bool Empty()//Boolean that asks for an integer
     {
-        return ((head == NULL)? true : false);
+        return (head == NULL); //Simplified expression
     }
 
     void AddBefore(int pos, int data)//Adds key before node
@@ -276,17 +276,17 @@ public:
             return;
         }
 
-       int count = 0;
-       while (curr != NULL && count < pos)
-       {
-           curr = curr -> next;
-           ++count;
-       }
+        int count = 0;
+        while (curr != NULL && count < pos)
+        {
+            curr = curr -> next;
+            ++count;
+        }
 
-       if (curr == NULL)
-       {
-           cout << "Position does not exist" << endl;
-       }
+        if (curr == NULL)
+        {
+            cout << "Position does not exist" << endl;
+        }
 
         Node *newNode = new Node;
         newNode -> data = data;
@@ -308,8 +308,8 @@ public:
 
         while (curr != NULL)
         {
-          cout << curr -> data << ((curr -> next == NULL)?"":",");
-           curr = curr -> next;
+            cout << curr -> data << ((curr -> next == NULL)?"":",");
+            curr = curr -> next;
         }
         cout << endl;
     }
@@ -357,80 +357,79 @@ int main()
 {
     SinglyLinkedList list1;
 
-        list1.PushFront(25);
-        list1.PushFront(50);
-        list1.PushFront(90);
-        list1.PushFront(40);
-        list1.PushFront(35);
+    list1.PushFront(25);
+    list1.PushFront(50);
+    list1.PushFront(90);
+    list1.PushFront(40);
+    list1.PushFront(35);
 
-        cout << "List 1: ";
-        list1.DisplayAll();
-        cout<< "Top: " <<list1.TopFront() << endl;
-        cout<< "Bottom: " <<list1.TopBack() << endl;
-        list1.PopFront();
+    cout << "List 1: ";
+    list1.DisplayAll();
+    cout<< "Top: " <<list1.TopFront() << endl;
+    cout<< "Bottom: " <<list1.TopBack() << endl;
+    list1.PopFront();
 
-        cout << "List 1: ";
-        list1.DisplayAll();
-        cout << endl;
+    cout << "List 1: ";
+    list1.DisplayAll();
 
-       list1.PopFront();
-       cout << "List 1: ";
-       list1.DisplayAll();
+    list1.PopFront();
+    cout << "List 1: ";
+    list1.DisplayAll();
 
-       list1.PushBack(10);
-       list1.PushBack(12);
-       list1.PushBack(14);
+    list1.PushBack(10);
+    list1.PushBack(12);
+    list1.PushBack(14);
 
-       cout << "List 1: ";
-       list1.DisplayAll();
-       cout << list1.FindKey(25) << endl;
-       cout << list1.FindKey(6) << endl;
-       cout <<list1.Empty() << endl;
+    cout << "List 1: ";
+    list1.DisplayAll();
+    cout << list1.FindKey(25) << endl;
+    cout << list1.FindKey(6) << endl;
+    cout <<list1.Empty() << endl;
 
-       list1.AddBefore(3,94);
-       cout << "List 1: ";
-       list1.DisplayAll();
+    list1.AddBefore(3,94);
+    cout << "List 1: ";
+    list1.DisplayAll();
 
-       list1.AddAfter(2,5);
-       cout << "List 1: ";
-       list1.DisplayAll();
+    list1.AddAfter(2,5);
+    cout << "List 1: ";
+    list1.DisplayAll();
 
-       cout << "Size of list is " << list1.Size() << endl;
-       list1.ReplaceKey(6,87);
-       cout << "List 1: ";
-       list1.DisplayAll();
+    cout << "Size of list is " << list1.Size() << endl;
+    list1.ReplaceKey(6,87);
+    cout << "List 1: ";
+    list1.DisplayAll();
 
-       list1.PopFront();
-       list1.PopFront();
-       list1.PopFront();
-       list1.PopFront();
-       list1.PopFront();
-       list1.PopFront();
-       list1.PopFront();
-       list1.PopFront();
+    list1.PopFront();
+    list1.PopFront();
+    list1.PopFront();
+    list1.PopFront();
+    list1.PopFront();
+    list1.PopFront();
+    list1.PopFront();
+    list1.PopFront();
 
-       cout << list1.Empty() << endl;
+    cout << list1.Empty() << endl;
 
-cout << "BONUS content" << endl;
+    cout << "BONUS content (The shits and giggles edition)" << endl;
     SinglyLinkedList list2;
 
-        list2.PushFront(35);
-        list2.PushFront(990);
-        list2.PushFront(56);
-        list2.PushFront(76);
-        list2.PushFront(69);
+    list2.PushFront(35);
+    list2.PushFront(990);
+    list2.PushFront(56);
+    list2.PushFront(76);
+    list2.PushFront(69);
 
-        list2.Erase(990);
-        cout << "List 2: ";
-        list2.DisplayAll();
+    list2.Erase(990);
+    cout << "List 2: ";
+    list2.DisplayAll();
 
-        list2.EraseAll();
-        cout << "List 2: ";
-        list2.DisplayAll();
+    list2.EraseAll();
+    cout << "List 2: ";
+    list2.DisplayAll();
 
     SinglyLinkedList list3;
-        cout << "List 3: ";
-        list3.DisplayAll();
+    cout << "List 3: ";
+    list3.DisplayAll();
 
     return 0;
 }
