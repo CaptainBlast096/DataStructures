@@ -371,8 +371,7 @@ int main()
 
         cout << "List 1: ";
         list1.DisplayAll();
-        cout << endl;
-
+       
        list1.PopFront();
        cout << "List 1: ";
        list1.DisplayAll();
