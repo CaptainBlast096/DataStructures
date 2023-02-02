@@ -19,7 +19,7 @@ struct Node // struct is a user-defined data type in C++ the creates a data type
 
     Node()
     {
-        next = NULL; //NULL is a safer way to create a new node than NULL because it is made for pointers
+        next = NULL; //nullptr is a safer way to create a new node than NULL because it is made for pointers | g++ does not know nullptr
         //Last node has to point to a null value
     }
 
@@ -220,7 +220,7 @@ public:
 
     bool Empty()//Boolean that asks for an integer
     {
-        return ((head == NULL)? true : false);
+        return (head == NULL); //Simplified expression
     }
 
     void AddBefore(int pos, int data)//Adds key before node
@@ -411,7 +411,7 @@ int main()
 
        cout << list1.Empty() << endl;
 
-cout << "BONUS content" << endl;
+cout << "BONUS content (The shits and giggles edition)" << endl;
     SinglyLinkedList list2;
 
         list2.PushFront(35);
