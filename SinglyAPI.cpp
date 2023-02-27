@@ -369,12 +369,13 @@ int main()
     cout<< "Bottom: " <<list1.TopBack() << endl;
     list1.PopFront();
 
-    cout << "List 1: ";
-    list1.DisplayAll();
+        cout << "List 1: ";
+        list1.DisplayAll();
+        cout << endl;
 
-    list1.PopFront();
-    cout << "List 1: ";
-    list1.DisplayAll();
+       list1.PopFront();
+       cout << "List 1: ";
+       list1.DisplayAll();
 
     list1.PushBack(10);
     list1.PushBack(12);
@@ -410,7 +411,7 @@ int main()
 
     cout << list1.Empty() << endl;
 
-    cout << "BONUS content (The shits and giggles edition)" << endl;
+cout << "BONUS content" << endl;
     SinglyLinkedList list2;
 
     list2.PushFront(35);
