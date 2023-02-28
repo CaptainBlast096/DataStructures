@@ -1,12 +1,3 @@
-/*
- Name: Jaleel Rogers
- Student ID: 11239
- Date: 03/01/23
- Major: Computer Science
- Course: COP4415
- Professor: Professor Luis
- */
-
 #include <iostream>
 #include <stack>
 #include <string> //For string class just in case
